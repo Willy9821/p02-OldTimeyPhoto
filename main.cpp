@@ -2,7 +2,10 @@
 #include <vector>
 #include "bitmap.h"
  
-using namespace std
+using namespace std;
+
+int rows;
+int columns;
 
 int main()
 {
@@ -18,6 +21,23 @@ int main()
  8. Once every pixel has been changed save as a new file.
  9. Display the new image to the user.
 */
+    Bitmap image;
+    vector< vector <Pixel> > bmp;
+    Pixel rgb;
+
+    image.open("machupicchu.bmp");
+    bmp = image.toPixelMatrix();
+
+    cout<<"Machu Picchu has been loaded. It is "<<bmp[0].size()<<" pixels wide and "<<bmp.size()<< " pixels high."<<endl;
+
+    rgb = bmp[0][0];
+    rgb.red = 0;
+
+    bmp[0][0] = rgb;
+    image.fromPixelMatrix(bmp);
+    image.save("machupicchu.bmp");
+
+
 return 0;
 }
 
