@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int row, column, color;
+int row, column, color, average;
 string fileName;
 
 int main()
@@ -24,26 +24,33 @@ int main()
  8. Once every pixel has been changed save as a new file.
  9. Display the new image to the user.
 */
- cout<< "Hello, please enter the file name of an image(must be in Windows BMP format)."<<endl;
+ cout<< "Hello, please enter the file name of an image."<<endl;
  cin>>fileName;
 
- if(fileName[0] == 'B' || fileName[1] == 'M')
- {
-  Bitmap image;
-  vector< vector <Pixel> > bmp;
-  Pixel rgb;
+ Bitmap image;
+ vector< vector <Pixel> > bmp;
+ Pixel rgb;
 
-  image.open("machupicchu.bmp");
-  bmp = image.toPixelMatrix();
+ image.open("machupicchu.bmp");
+ bmp = image.toPixelMatrix();
 
-  cout<<"Machu Picchu has been loaded. It is "<<bmp[0].size()<<" pixels wide and "<<bmp.size()<< " pixels high."<<endl;
-   
+ cout<<"machupicchu.bmp has been loaded. It is "<<bmp[0].size()<<" pixels wide and "<<bmp.size()<< " pixels high."<<endl;
+  do
+   {
      for(int row = 0; row < bmp.size(); row ++)
        {
+        Bitmap image;
+        vector< vector <Pixel> > bmp;
+        Pixel rgb;
+
+        image.open("machupicchu.bmp");
+        bmp = image.toPixelMatrix();
+
         rgb = bmp[0][0];
-        color = rgb.red + rgb.green + rgb.blue / 3;
+        average = (rgb.red + rgb.green + rgb.blue)/3;
         rgb.red = rgb.green = rgb.blue;
        }  
+
           for(int column = 0; column < bmp[0].size(); column ++)
             {
              rgb = bmp[0][0];
@@ -54,8 +61,8 @@ int main()
         bmp[0][0] = rgb;
         image.fromPixelMatrix(bmp);
         image.save("machupicchu.bmp");        
- }
- else
+   }
+ while(fileName == "bmp"); 
   {
    cout<<"The file must be a BMP format"<<endl;
   } 
