@@ -27,42 +27,32 @@ int main()
  cout<< "Hello, please enter the file name of an image."<<endl;
  cin>>fileName;
 
- Bitmap image;
- vector< vector <Pixel> > bmp;
- Pixel rgb;
-
- image.open("machupicchu.bmp");
- bmp = image.toPixelMatrix();
-
- cout<<"machupicchu.bmp has been loaded. It is "<<bmp[0].size()<<" pixels wide and "<<bmp.size()<< " pixels high."<<endl;
-  do
+  if (fileName == "fileName.bmp")
    {
+    Bitmap image;
+    vector< vector <Pixel> > bmp;
+    Pixel rgb;
+
+    image.open(fileName);
+    bmp = image.toPixelMatrix();
+
+    cout<<" "<<fileName<<" has been loaded. It is "<<bmp[0].size()<<" pixels wide and "<<bmp.size()<<" pixels high."<<endl;
+
      for(int row = 0; row < bmp.size(); row ++)
-       {
-        Bitmap image;
-        vector< vector <Pixel> > bmp;
-        Pixel rgb;
-
-        image.open("machupicchu.bmp");
-        bmp = image.toPixelMatrix();
-
-        rgb = bmp[0][0];
-        average = (rgb.red + rgb.green + rgb.blue)/3;
-        rgb.red = rgb.green = rgb.blue;
-       }  
-
+       {  
           for(int column = 0; column < bmp[0].size(); column ++)
             {
              rgb = bmp[0][0];
              color = rgb.red + rgb.green + rgb.blue / 3;
              rgb.red = rgb.green = rgb.blue;
             }  
+       }
 
-        bmp[0][0] = rgb;
-        image.fromPixelMatrix(bmp);
-        image.save("machupicchu.bmp");        
+     bmp[0][0] = rgb;
+     image.fromPixelMatrix(bmp);
+     image.save(fileName);        
    }
- while(fileName == "bmp"); 
+ else 
   {
    cout<<"The file must be a BMP format"<<endl;
   } 
