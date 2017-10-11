@@ -1,8 +1,6 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include "bitmap.h"
-#include <cstdlib>
 #include <string>
 
 using namespace std;
