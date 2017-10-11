@@ -23,21 +23,22 @@ int main()
  8. Once every pixel has been changed save as a new file.
  9. Display the new image to the user.
 */
- cout<< "Hello, please enter the file name of an image."<<endl;
- cin>>fileName;
+do
+ {
+  cout<< "Please enter the file name of an image."<<endl;
+  cin>>fileName;
 
- Bitmap image;
- vector< vector <Pixel> > bmp;
- Pixel rgb;
+  Bitmap image;
+  vector< vector <Pixel> > bmp;
+  Pixel rgb;
  
- image.open(fileName);
- validBmp = image.isImage();
+  image.open(fileName);
+  validBmp = image.isImage();
 
-  if( validBmp == true ) 
-   { 
-    bmp = image.toPixelMatrix();
-
-    cout<<" "<<fileName<<" has been loaded. It is "<<bmp[0].size()<<" pixels wide and "<<bmp.size()<<" pixels high."<<endl;
+   if( validBmp == true ) 
+    { 
+     bmp = image.toPixelMatrix();
+     cout<<" "<<fileName<<" has been loaded. It is "<<bmp[0].size()<<" pixels wide and "<<bmp.size()<<" pixels high."<<endl;
 
      for(int row = 0; row < bmp.size(); row ++)
        {  
@@ -53,12 +54,14 @@ int main()
        }
      image.fromPixelMatrix(bmp);
      image.save("oldtimey.bmp");        
-   }
- else 
-  {
-   cout<<"The file must be a BMP format"<<endl;
-  } 
-
+    }
+ }
+ while( validBmp != true);
+    {
+     cout<<"The file must be a BMP format"<<endl;
+     cin>>fileName;
+    } 
+      
 return 0;
 }
 
