@@ -7,7 +7,8 @@
 
 using namespace std;
 
-int row, column, color, average;
+int row, column, average;
+bool validBmp;
 string fileName;
 
 int main()
@@ -27,30 +28,33 @@ int main()
  cout<< "Hello, please enter the file name of an image."<<endl;
  cin>>fileName;
 
-  if (fileName == "fileName.bmp")
-   {
-    Bitmap image;
-    vector< vector <Pixel> > bmp;
-    Pixel rgb;
+ Bitmap image;
+ vector< vector <Pixel> > bmp;
+ Pixel rgb;
+ 
+ image.open(fileName);
+ validBmp = image.isImage();
 
-    image.open(fileName);
+  if( validBmp == true ) 
+   { 
     bmp = image.toPixelMatrix();
 
     cout<<" "<<fileName<<" has been loaded. It is "<<bmp[0].size()<<" pixels wide and "<<bmp.size()<<" pixels high."<<endl;
 
      for(int row = 0; row < bmp.size(); row ++)
        {  
-          for(int column = 0; column < bmp[0].size(); column ++)
+          for(int column = 0; column < bmp[row].size(); column ++)
             {
-             rgb = bmp[0][0];
-             color = rgb.red + rgb.green + rgb.blue / 3;
-             rgb.red = rgb.green = rgb.blue;
+             rgb = bmp[row][column];
+             average = rgb.red + rgb.green + rgb.blue / 3;
+             rgb.red = average;
+             rgb.green = average;
+             rgb.blue = average;
+             bmp[row][column] = rgb;
             }  
        }
-
-     bmp[0][0] = rgb;
      image.fromPixelMatrix(bmp);
-     image.save(fileName);        
+     image.save("oldtimey.bmp");        
    }
  else 
   {
