@@ -27,7 +27,7 @@ do
  {
   cout<< "Please enter the file name of an image."<<endl;
   cin>>fileName;
-
+ 
   Bitmap image;
   vector< vector <Pixel> > bmp;
   Pixel rgb;
@@ -35,7 +35,7 @@ do
   image.open(fileName);
   validBmp = image.isImage();
 
-   if( validBmp == true ) 
+    if( validBmp == true ) 
     { 
      bmp = image.toPixelMatrix();
      cout<<" "<<fileName<<" has been loaded. It is "<<bmp[0].size()<<" pixels wide and "<<bmp.size()<<" pixels high."<<endl;
@@ -45,23 +45,24 @@ do
           for(int column = 0; column < bmp[row].size(); column ++)
             {
              rgb = bmp[row][column];
-             average = rgb.red + rgb.green + rgb.blue / 3;
+             average = (rgb.red + rgb.green + rgb.blue) / 3;
              rgb.red = average;
              rgb.green = average;
              rgb.blue = average;
              bmp[row][column] = rgb;
             }  
        }
+      
      image.fromPixelMatrix(bmp);
      image.save("oldtimey.bmp");        
     }
- }
- while( validBmp != true);
+   else
     {
-     cout<<"The file must be a BMP format"<<endl;
-     cin>>fileName;
-    } 
-      
+     cout<<" This is not a BMP format."<<endl; 
+    }
+ }
+while( validBmp == false );
+ 
 return 0;
 }
 
